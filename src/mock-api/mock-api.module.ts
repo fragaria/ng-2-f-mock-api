@@ -8,7 +8,7 @@ import { MockData } from './mock-data';
 @NgModule({
   imports: [
     HttpModule,
-    InMemoryWebApiModule.forRoot(MockData, { delay: 500 })
+    InMemoryWebApiModule.forRoot(MockData, { delay: 500 , passThruUnknownUrl: true})
   ]
 })
 export class MockApiModule { }
