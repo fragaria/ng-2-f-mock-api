@@ -15,9 +15,69 @@ Jedná se mock backendového api postaveného na modulu [in-memory-web-api](http
 
 ### Použití
 - Nainstalujte si modul do projektu (to můžete udělat jednou ze dvou následujících možností)
-    - publikuje module pomoci `npm --access public publish` a přidejte si jeho jméno do `dependencies` do package.json ve vašem projektu a dejte `npm install`
+    - přidejte si jeho jméno do `dependencies` do `package.json` ve vašem projektu a dejte `npm install` (pokud zatím není publikován, publikuje module pomoci `npm --access public publish`)
     - nebo si udělejte link pomocí `npm link`, jděte do rootu vašeho projektu a zavolejte `npm link cesta-k-modulu`
-- Přidejte si modul `MockApiModule` do projektu, tam kde ho potřebujete použít např. v `AppModule` do pole `imports` a pak jen volejte ve vašich službách místo ostré url mockovanou (např. `url = 'api/items'`)
+- Přidejte si modul `MockApiModule` do projektu, tam kde ho potřebujete použít např. v `AppModule` do pole `imports`
+
+```js
+
+import { NgModule }      from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule }  from '@angular/http';
+
+import { MockApiModule } from 'ng2-f-mock-api';
+
+import { AppComponent } from './app.component';
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    HttpModule,
+    MockApiModule
+  ],
+  declarations: [ AppComponent ],
+  exports: [ AppComponent ],
+  bootstrap: [ AppComponent ]
+})
+export class AppModule { }
+
+```
+- Volejte ve vašich službách místo ostré url mockovanou (např. `url = 'api/items'`)
+
+```js
+
+import { Injectable } from '@angular/core';
+import { Http, Response } from '@angular/http';
+
+import { Item } from './item.model';
+
+import { Observable } from 'rxjs/Observable';
+
+@Injectable()
+export class ItemService {
+  protected url = 'api/items';  // URL to web API
+  protected model = Item;
+
+  constructor (protected http: Http) { }
+
+  getItems (): Observable<Item[]> {
+    return this.http.get(this.url)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+  protected extractData(res: Response): any {
+    let body = res.json();
+    return body.data;
+  }
+
+  protected handleError (error: Response | any): Observable<any> {
+    console.log('error');
+    return Observable.throw('error');
+  }
+}
+
+```
 
 ### Tasky
 - `npm test` - spuštění testů a coverage analýzy
