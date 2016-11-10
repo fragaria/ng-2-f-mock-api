@@ -1,4 +1,6 @@
-import { InMemoryDbService } from 'angular-in-memory-web-api';
+import { InMemoryDbService, ParsedUrl } from 'angular-in-memory-web-api';
+
+import { URLSearchParams } from '@angular/http';
 
 export class MockData implements InMemoryDbService {
   createDb() {
@@ -45,5 +47,50 @@ export class MockData implements InMemoryDbService {
       items: items,
       resources: resources
     };
+  }
+
+  protected getLocation(href: string) {
+    const l = document.createElement('a');
+    l.href = href;
+    return l;
+  }
+
+  /*
+   * Used instead of original parseUrl method
+   * https://github.com/angular/in-memory-web-api/blob/0.1.13/src/in-memory-backend.service.ts#L509
+   * becouse of it raises errors for any non mock urls
+   */
+  protected parseUrl(url: string): ParsedUrl {
+    try {
+      // If you have protocol send request out of mock api
+      // original parseUrl raise error with 500 code
+      if (url.match(/^https?:\/\//)) {
+        return {
+          base: '',
+          collectionName: undefined,
+          id: undefined,
+          query: undefined,
+          resourceUrl: undefined
+        }
+      }
+      const loc = this.getLocation(url);
+      let drop = 0;
+      let urlRoot = '';
+      if (loc.host !== '') {
+        // url for a server on a different host!
+        // assume it's collection is actually here too.
+        drop = 1; // the leading slash
+        urlRoot = loc.protocol + '//' + loc.host + '/';
+      }
+      const path = loc.pathname.substring(drop);
+      let [base, collectionName, id] = path.split('/');
+      const resourceUrl = urlRoot + base + '/' + collectionName + '/';
+      [collectionName] = collectionName.split('.'); // ignore anything after the '.', e.g., '.json'
+      const query = loc.search && new URLSearchParams(loc.search.substr(1));
+      return { base, collectionName, id, query, resourceUrl };
+    } catch (err) {
+      const msg = `unable to parse url '${url}'; original error: ${err.message}`;
+      throw new Error(msg);
+    }
   }
 }

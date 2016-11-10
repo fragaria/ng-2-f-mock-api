@@ -5,10 +5,15 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { MockData } from './mock-data';
 
+let configData = {
+  delay: 500,
+  passThruUnknownUrl: true
+}
+
 @NgModule({
   imports: [
     HttpModule,
-    InMemoryWebApiModule.forRoot(MockData, { delay: 500 , passThruUnknownUrl: true})
+    InMemoryWebApiModule.forRoot(MockData, configData)
   ]
 })
 export class MockApiModule { }
