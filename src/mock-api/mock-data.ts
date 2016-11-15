@@ -24,21 +24,30 @@ export class MockData implements InMemoryDbService {
       { id: 14, title: 'Jacket' }
     ];
     let resources =[
-      { lang: 'cs', data: {
+      { lang: 'cs', module:'app' , data: {
         "app": {
-          "title": "Ahoj, světe!"
+          "title": "Ahoj, světe!!"
         },
-        "title": "Ahoj, světe!",
+        "title": "Ahoj, světe!!!",
         "bu0916.czech": "Česky",
-        "bu0917.english": "English"
+        "bu0917.english": "English",
+        "items": "app Prvky",
+        "app.title": "Ahoj, světe!!!!"
       }},
-      { lang: 'en', data: {
+      { lang: 'en', module:'app' , data: {
         "app": {
           "title": "Hello, world!"
         },
-        "title": "Hello, s world!",
-        "bu0916.czech": "Czech",
-        "bu0917.english": "English"
+        "title": "Hello, world!!!",
+        "bu0916.czech": "Česky",
+        "bu0917.english": "English",
+        "items": "app Items",
+      }},
+      { lang: 'cs', module:'item' , data: {
+        "items": "Prvky z API",
+      }},
+      { lang: 'en', module:'item' , data: {
+        "items": "Items from API",
       }}
     ];
     return {
