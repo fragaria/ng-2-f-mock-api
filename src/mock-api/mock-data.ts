@@ -3,6 +3,9 @@ import { InMemoryDbService, ParsedUrl } from 'angular-in-memory-web-api';
 import { URLSearchParams } from '@angular/http';
 
 export class MockData implements InMemoryDbService {
+  // data used for update data in createDb method
+  static freshData:Object = {};
+
   createDb() {
     let clients = [
       { id: 10, name: "Michal Michal", personalIdentNumber: "9007260987", email: "michal@michal.cz" },
@@ -50,12 +53,26 @@ export class MockData implements InMemoryDbService {
         "items": "Items from API",
       }}
     ];
-    return {
+
+    let data = {
       clients: clients,
       clientsRelated: clientsRelated,
       items: items,
       resources: resources
     };
+
+    data = Object.assign({}, data, MockData.freshData);
+
+    return data
+  }
+
+  /**
+   * Return this class with set up fresh data
+   * they are used for update data in createDb method
+   */
+  static getMeWithFreshData(newData:Object) {
+    MockData.freshData = Object.assign({}, MockData.freshData, newData);
+    return MockData
   }
 
   protected getLocation(href: string) {

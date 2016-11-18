@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { HttpModule }  from '@angular/http';
 
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -11,9 +11,12 @@ let configData = {
 }
 
 @NgModule({
-  imports: [
-    HttpModule,
-    InMemoryWebApiModule.forRoot(MockData, configData)
-  ]
+  imports: [ HttpModule ]
 })
-export class MockApiModule { }
+export class MockApiModule {
+
+  static forRoot(newData: Object = {}): ModuleWithProviders {
+    // call with new data from project if you want inject your data to mock data
+    return InMemoryWebApiModule.forRoot(MockData.getMeWithFreshData(newData), configData)
+  }
+}
