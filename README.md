@@ -33,7 +33,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     HttpModule,
-    MockApiModule
+    MockApiModule.forRoot()
   ],
   declarations: [ AppComponent ],
   exports: [ AppComponent ],
@@ -42,6 +42,38 @@ import { AppComponent } from './app.component';
 export class AppModule { }
 
 ```
+
+- Pokud vám nestačí data co jsou v tomto modulu, tak sem můžete přidat svá vlastní (soubor `src/mock-api/mock-data.ts` třída `MockData` metoda `createDb`), nebo je do modulu injecktnout z projektu (to je preferovaná varianta a jediná možná, pokud v projektu potřebujete mít modifikovány data, která už se zde nacházejí)
+
+```js
+
+import { NgModule }      from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule }  from '@angular/http';
+
+import { MockApiModule } from 'ng2-f-mock-api';
+
+import { AppComponent } from './app.component';
+
+let items = [
+  { id: 11, title: 'Whatever' },
+  { id: 12, title: 'Thing' }
+];
+
+@NgModule({
+  imports: [
+    BrowserModule,
+    HttpModule,
+    MockApiModule.forRoot({items: items})
+  ],
+  declarations: [ AppComponent ],
+  exports: [ AppComponent ],
+  bootstrap: [ AppComponent ]
+})
+export class AppModule { }
+
+```
+
 - Volejte ve vašich službách místo ostré url mockovanou (např. `url = 'api/items'`)
 
 ```js
