@@ -83,9 +83,10 @@ export class MockData implements InMemoryDbService {
         }
       }
       const loc = this.getLocation(url);
-      let drop = 0;
+      const locRoot = this.getLocation('./');
+      let drop = locRoot.pathname.length;
       let urlRoot = '';
-      if (loc.host !== '') {
+      if (loc.host !== locRoot.host) {
         // url for a server on a different host!
         // assume it's collection is actually here too.
         drop = 1; // the leading slash
