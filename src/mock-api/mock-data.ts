@@ -35,7 +35,9 @@ export class MockData implements InMemoryDbService {
         "bu0916.czech": "Česky",
         "bu0917.english": "English",
         "items": "Prvky",
-        "app.title": "Ahoj, světe!!!!"
+        "app.title": "Ahoj, světe!!!!",
+        "numberFormattingTitle": "Formátování čísel",
+        "dateFormattingTitle": "Formátování datumu",
       }},
       { lang: 'en', module:'app' , data: {
         "app": {
@@ -45,6 +47,8 @@ export class MockData implements InMemoryDbService {
         "bu0916.czech": "Česky",
         "bu0917.english": "English",
         "items": "Items",
+        "numberFormattingTitle": "Number formatting",
+        "dateFormattingTitle": "Date formatting",
       }},
       { lang: 'cs', module:'item' , data: {
         "items": "Prvky z API",
