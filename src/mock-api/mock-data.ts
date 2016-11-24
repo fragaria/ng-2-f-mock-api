@@ -34,7 +34,7 @@ export class MockData implements InMemoryDbService {
         "title": "Ahoj, světe!!!",
         "bu0916.czech": "Česky",
         "bu0917.english": "English",
-        "items": "app Prvky",
+        "items": "Prvky",
         "app.title": "Ahoj, světe!!!!"
       }},
       { lang: 'en', module:'app' , data: {
@@ -44,7 +44,7 @@ export class MockData implements InMemoryDbService {
         "title": "Hello, world!!!",
         "bu0916.czech": "Česky",
         "bu0917.english": "English",
-        "items": "app Items",
+        "items": "Items",
       }},
       { lang: 'cs', module:'item' , data: {
         "items": "Prvky z API",
