@@ -120,3 +120,8 @@ export class ItemService {
 ### Tasky (release)
 - `npm version [patch|minor|major]` - pro zvednutí verze modulu
 - `npm --access public publish` - pro nahrání na npm repository
+
+### Troubleshooting
+#### npm publish - ENEEDAUTH
+Pro publikování balíčku je nutné se přihlásit příkazem `npm adduser`. Ten přidá autentikační token do ~/.npmrc. 
+Při použití lokálního npm registru je nutné soubor editovat a nahradit adresu `/nexus/repository/npm-fast-group` za `/nexus/repository/npm-fast-private`.
