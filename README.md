@@ -115,11 +115,11 @@ export class ItemService {
 - `npm test` - spuštění testů a coverage analýzy
 
 ### Tasky (validace)
-- `gulp sonar` pro spuštění analýzy souborů na chyby
+- `gulp sonar` - spuštění statické analýzy souborů
 
 ### Tasky (release)
-- `npm version [patch|minor|major]` - pro zvednutí verze modulu
-- `npm --access public publish` - pro nahrání na npm repository
+- `npm version [patch|minor|major]` - zvednutí verze modulu
+- `npm --access public publish` - nahrání na npm repository
 
 ### Troubleshooting
 #### npm publish - ENEEDAUTH
