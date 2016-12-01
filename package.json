@@ -11,7 +11,6 @@
     "init": "gulp init",
     "lint": "npm run lint:ts",
     "lint:ts": "tslint src/{,**/}*.ts",
-    "postinstall": "typings install",
     "tslint": "tslint",
     "typedoc": "typedoc",
     "typings": "typings"
@@ -42,7 +41,6 @@
     "tslint-loader": "^2.1.4",
     "typedoc": "^0.4.5",
     "typescript": "^2.0.0",
-    "typings": "^1.3.3",
     "vinyl-paths": "^2.1.0"
   },
   "dependencies": {
@@ -54,7 +52,9 @@
     "@angular/platform-browser": "^2.0.1",
     "@angular/platform-browser-dynamic": "^2.0.1",
     "@angular/platform-server": "^2.0.1",
-    "@types/lodash": "^4.14.37",
+    "@types/core-js": "^0.9.34",
+    "@types/lodash": "^4.14.38",
+    "@types/node": "^6.0.51",
     "angular-in-memory-web-api": "0.1.13",
     "core-js": "^2.4.1",
     "lodash": "^4.16.3",
