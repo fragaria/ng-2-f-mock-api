@@ -16,7 +16,6 @@
   ],
   "filesGlob": [
     "./src/**/*.ts",
-    "./typings/index.d.ts",
     "!./node_modules/**"
   ],
   "awesomeTypescriptLoaderOptions": {
